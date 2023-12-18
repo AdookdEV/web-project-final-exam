@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Jost&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Jost:wght@400;500;700&display=swap');
 
 
 :root {
@@ -11,6 +11,8 @@
     --grid-list-min-width-mobile: 100px;
     --scroll-bar-color: #cdcdcd;
     --scroll-bar-bg: #f0f0f0;
+    --indicator-bg: #9edc53;
+    --indicator-radius: 18px;
 }
 
 *,
@@ -46,4 +48,16 @@ a {
 
 .is-hide {
     display: none;
+}
+
+.number-indicator {
+    display: inline-block;
+    color: white;
+    background-color: var(--indicator-bg);
+    border-radius: 50%;
+    height: var(--indicator-radius);
+    width: var(--indicator-radius);
+    line-height: var(--indicator-radius);
+    text-align: center;
+    font-size: 0.7rem;
 }

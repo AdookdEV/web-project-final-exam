@@ -16,9 +16,23 @@
     margin-left: 0px;
 }
 
+.header__cabinet .header__control-indicator {
+    display: none;
+}
+
 .header__control-text {
     font-size: 16px;
     line-height: 1;
+}
+
+.icon-holder {
+    position: relative;
+}
+
+.header__control-indicator {
+    position: absolute;
+    top: calc(3px - var(--indicator-radius) / 2);
+    right: calc(-5px - var(--indicator-radius) / 2);
 }
 
 .icon-user,

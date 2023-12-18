@@ -12,11 +12,18 @@ const icons = {
     "compare": (<BiBarChart className="icon-compare" />)
 };
 
-export const ControllButton = ({className, text, iconName, url}) => {
+export const ControllButton = ({className, text, iconName, url, indicatorNumber}) => {
     return (
         <Link className={`header__control-btn ${className}`} to={url}>
-            {icons[iconName]}
+            <div className="icon-holder">
+                {icons[iconName]}
+                {
+                    indicatorNumber > 0 ? <span className="header__control-indicator number-indicator">{indicatorNumber}</span> : null
+                }
+            </div>
+            
             <span className="header__control-text">{text}</span>
+           
         </Link>
     );
 };

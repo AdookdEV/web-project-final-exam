@@ -1,0 +1,139 @@
+.products-grid-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 3rem inherit;
+}
+
+.products-grid-content {
+    display: grid;
+    width: 100%;
+    gap: 2rem;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    padding-top: 1rem;
+    padding-bottom: 2rem;
+}
+
+
+
+
+
+/* ProductCard */
+
+.product-card {
+    position: relative;
+    height: 100%;
+}
+
+.product-card__content {
+    display: grid;
+    grid-template-columns: 1fr 40px;
+    grid-template-areas:
+        "photo  control"
+        "title  control"
+        "bottom control"
+    ;
+    height: 100%;
+}
+
+.product-card__photo-area {
+    grid-area: photo;
+    width: 100%;
+    height: 200px;
+}
+
+.product-card__photo-area a {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    background-color: white;
+}
+
+.product-card__photo-area img {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.product-card__title-area {
+    grid-area: title;
+    margin-bottom: 0.2rem;
+}
+
+.product-card__title-area a:hover {
+    color: var(--accent-color);
+}
+
+.product-car__price-curr {
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: #333333;
+}
+
+.product-card__bottom-area {
+    grid-area: bottom;
+    display: flex;
+    align-items: flex-end;
+    height: 100%;
+}
+
+.product-card__controls-area {
+    grid-area: control;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+
+
+.product-card__cart-btn {
+    position: absolute;
+    bottom: 0;
+}
+
+.product-card__cart-btn>button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    color: white;
+    width: 40px;
+    height: 40px;
+    background-color: var(--accent-color);
+}
+
+.product-card__cart-btn>button:hover {
+    background-color: var(--header-catalog-btn-hover);
+}
+
+.product-card__cart-btn svg {
+    width: 24px;
+    height: 24px;
+}
+
+.product-card__fav-btn button,
+.product-card__compare-btn button {
+    border: none;
+    background-color: transparent;
+}
+
+.product-card__fav-btn svg,
+.product-card__compare-btn svg {
+    color: grey;
+    width: 24px;
+    height: 24px;
+}
+
+
+.product-card__in-fav svg {
+    color: var(--accent-color);
+}
+
+.cart-number-indicator {
+    position: absolute;
+    top: calc(0px - var(--indicator-radius) / 2);
+    right: calc(0px - var(--indicator-radius) / 2);
+}

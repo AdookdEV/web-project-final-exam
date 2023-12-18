@@ -2,14 +2,17 @@ import { Route, Routes } from 'react-router-dom';
 
 import Header from '../Header';
 import Footer from '../Footer';
+import Home from '../pages/Home';
+
 
 import './style.css';
+
 function App() {
     return (
         <div className="page-layout">
             <Header />
             <Routes>
-                <Route index element={<h1>Main page</h1>}></Route>
+                <Route index element={<Home/>}></Route>
                 <Route path='/product/:productId' element={<h1>Product page</h1>}></Route>
                 <Route path='/category/:categoryName' element={<h1>Category page</h1>}></Route>
                 <Route path='/client_account/orders' element={<h1>Orders page</h1>}></Route>
