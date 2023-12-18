@@ -47,7 +47,42 @@ export default class FakeShopAPI {
     ];
 
     _products = [
-        
+        {
+            id: 1,
+            title: "Iphone 10",
+            price: 800,
+            description: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Delectus voluptatum eius sunt, hic quos id beatae quaerat vero, repudiandae ea tempora et dolore?",
+        },
+        {
+            id: 2,
+            title: "Xiaomi Redmi Note 10",
+            price: 250,
+            description: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Delectus voluptatum eius sunt, hic quos id beatae quaerat vero, repudiandae ea tempora et dolore?",
+        },
+        {
+            id: 3,
+            title: "Acer Nitro 5",
+            price: 500,
+            description: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Delectus voluptatum eius sunt, hic quos id beatae quaerat vero, repudiandae ea tempora et dolore?",
+        },
+        {
+            id: 4,
+            title: "HP laptop",
+            price: 250,
+            description: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Delectus voluptatum eius sunt, hic quos id beatae quaerat vero, repudiandae ea tempora et dolore?",
+        },
+        {
+            id: 5,
+            title: "Iphone 11",
+            price: 1000,
+            description: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Delectus voluptatum eius sunt, hic quos id beatae quaerat vero, repudiandae ea tempora et dolore?",
+        },
+        {
+            id: 6,
+            title: "Iphone 12",
+            price: 800,
+            description: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Delectus voluptatum eius sunt, hic quos id beatae quaerat vero, repudiandae ea tempora et dolore?",
+        },
     ];
 
     getAllCategories = async () => {
@@ -81,8 +116,8 @@ export default class FakeShopAPI {
         return this.res;
     };
 
-    filterProductsByTitle = (title) => {
-        title = title.trim().toLowerCase();
-        return this._products.filter(p => p.name.startswith(title));
+    filterProductsByTitle = async (productTitle) => {
+        productTitle = productTitle.trim().toLowerCase();
+        return this._products.filter(p => p.title.toLowerCase().startsWith(productTitle));
     }
 }
