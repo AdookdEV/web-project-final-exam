@@ -1,7 +1,7 @@
 import ProductCard from './ProductCard';
-import './style.css';
+// import './style.css';
 
-const ProductsGrid = ({ className, productsData }) => {
+const ProductsGrid = ({ className, productsData}) => {
     return (
         <div className={`products-grid-content ${className}`}>
             {

@@ -11,8 +11,8 @@ export const CategoryCollectionItem = ({ categoryData }) => {
 
     return (
         <div className="header__collection-item">
-            <Link className="header__collection-img-title" to={`/category`}>
-                <img className="header__collection-img" src={categoryData.imgUrl} alt={categoryData.title} />
+            <Link className="header__collection-img-title" to={`/category/${categoryData.id}`}>
+                <img className="header__collection-img" src={categoryData.image} alt={categoryData.title} />
                 <span>{categoryData.title}</span>
             </Link>
             <ul className="header__collection-controlls">

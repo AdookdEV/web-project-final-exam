@@ -1,0 +1,26 @@
+.feedback h2 {
+    margin-bottom: 10px;
+}
+
+
+.feedback__content {
+    padding: 35px 0px;
+}
+
+.feedback__content-text {
+    padding: 10px;
+    outline: 0;
+}
+
+.feedback__email {
+    padding: 8px;
+    outline: 0;
+}
+
+.feedback__btn {
+    margin-top: 5px;
+}
+
+.feedback__form > div  {
+    margin-bottom: 15px;
+}

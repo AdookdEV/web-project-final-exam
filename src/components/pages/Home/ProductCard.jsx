@@ -1,18 +1,67 @@
 import { Link } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
+
+import { CartContext } from "../../../context/CartContext";
+import { AlertMessagesContext } from "../../../context/AlertMessagesContext";
+
+import { createAlertMessage } from "../../../util/alert-message";
 import ICONS from "../../../util/icons";
-import { useState } from "react";
 
 
 const ProductCard = ({ productData }) => {
     const [inFavourites, setInFavourites] = useState(false);
     const [cartItemsNumber, setCartItemsNumber] = useState(0);
+    const [inCompare, setInCompare] = useState(false);
+
+    const { cartItems, setCartItems } = useContext(CartContext);
+    const { alertMessages, setAlertMessages } = useContext(AlertMessagesContext);
+
+    useEffect(() => {
+
+    }, [inCompare])
 
     const handleFavouriteClick = () => {
+        if (inFavourites) {
+            setAlertMessages([
+                ...alertMessages,
+                createAlertMessage("Product was removed from favourites", false)
+            ]);
+        } else {
+            setAlertMessages([
+                ...alertMessages,
+                createAlertMessage("✔ Product was added to favourites", false)
+            ]);
+        }
         setInFavourites(!inFavourites);
     };
 
     const handleCartLick = () => {
         setCartItemsNumber(cartItemsNumber + 1);
+        setCartItems([
+            ...cartItems,
+            productData
+        ]);
+        if (cartItemsNumber === 0) {
+            setAlertMessages([
+                ...alertMessages,
+                createAlertMessage("✔ Product was added to cart", false)
+            ]);
+        }
+    };
+
+    const handleCompareClick = () => {
+        if (inCompare) {
+            setAlertMessages([
+                ...alertMessages,
+                createAlertMessage("Product was removed from comapared products", false)
+            ]);
+        } else {
+            setAlertMessages([
+                ...alertMessages,
+                createAlertMessage("✔ Product was added to comapared products", false)
+            ]);
+        }
+        setInCompare(!inCompare);
     };
 
     return (
@@ -27,13 +76,16 @@ const ProductCard = ({ productData }) => {
                 <div className="product-card__controls-area">
                     <div className="product-card__fav-btn">
                         <button
-                            className={inFavourites ? "product-card__in-fav" : ""}
+                            className={inFavourites ? "product-card__fav-btn--favourite" : ""}
                             onClick={handleFavouriteClick}>
                             {inFavourites ? ICONS.HEART_FILL : ICONS.HEART}
                         </button>
                     </div>
                     <div className="product-card__compare-btn">
-                        <button>
+                        <button
+                            className={inCompare ? "product-card__compare-btn--compared" : ""}
+                            onClick={handleCompareClick}>
+
                             {ICONS.COMPARE}
                         </button>
                     </div>
@@ -46,7 +98,7 @@ const ProductCard = ({ productData }) => {
                         {
                             cartItemsNumber > 0 ? <span className="cart-number-indicator number-indicator">{cartItemsNumber}</span> : null
                         }
-                        
+
                     </div>
                 </div>
                 <div className="product-card__bottom-area">

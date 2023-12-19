@@ -2,43 +2,51 @@ export default class FakeShopAPI {
     _categories = [
         {
             id: 1,
-            name: "Smartphones and Tablets",
-            image: "images/medium_01.jpg"
+            title: "Smartphones and Tablets",
+            image: "/images/medium_01.jpg",
+            subCategories: []
         },
         {
             id: 2,
-            name: "Laptops and computers",
-            image: "images/medium_03.jpg"
+            title: "Laptops and computers",
+            image: "/images/medium_03.jpg",
+            subCategories: []
         },
         {
             id: 3,
-            name: "Devices for home",
-            image: "images/medium_06.jpg"
+            title: "Devices for home",
+            image: "/images/medium_06.jpg",
+            subCategories: []
         },
         {
             id: 4,
-            name: "Entertainment",
-            image: "images/medium_07.jpg"
+            title: "Entertainment",
+            image: "/images/medium_07.jpg",
+            subCategories: []
         },
         {
             id: 5,
-            name: "TVs, Audio-video, Hi-Fi",
-            image: "images/medium_05.jpg"
+            title: "TVs, Audio-video, Hi-Fi",
+            image: "/images/medium_05.jpg",
+            subCategories: []
         },
         {
             id: 6,
-            name: "Household appliances for the kitchen",
-            image: "images/medium_02.jpg"
+            title: "Household appliances for the kitchen",
+            image: "/images/medium_02.jpg",
+            subCategories: []
         },
         {
             id: 7,
-            name: "Beauty and health",
-            image: "images/medium_08.jpg"
+            title: "Beauty and health",
+            image: "/images/medium_08.jpg",
+            subCategories: []
         },
         {
             id: 8,
-            name: "Photo and video equipment",
-            image: "images/medium_04.jpg"
+            title: "Photo and video equipment",
+            image: "/images/medium_04.jpg",
+            subCategories: []
         },
     ];
 

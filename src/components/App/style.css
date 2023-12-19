@@ -50,6 +50,17 @@ a {
     display: none;
 }
 
+.button {
+    border: none;
+    background-color: var(--accent-color);
+    color: white;
+    padding: 10px;
+}
+
+.button:hover {
+    background-color: var(--header-catalog-btn-hover);
+}
+
 .number-indicator {
     display: inline-block;
     color: white;

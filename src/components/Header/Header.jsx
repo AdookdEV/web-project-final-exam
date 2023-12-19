@@ -11,8 +11,9 @@ import CategoryCollection from './CategoryCollection';
 import './style.css';
 
 
-function Header() {
+function Header({ categories }) {
   const [showCatalog, setShowCatalog] = useState(false);
+  
 
   const handleCategoryClick = () => {
     setShowCatalog(!showCatalog);
@@ -62,7 +63,7 @@ function Header() {
               {
                 showCatalog ?
                   <div className="header__collection">
-                    <CategoryCollection />
+                    <CategoryCollection categories={categories} />
                   </div>
                   : null
               }
@@ -70,8 +71,8 @@ function Header() {
           </div>
 
         </div>
-        
-        <CategoryMenu />
+
+        <CategoryMenu categories={categories} />
       </header>
       {
         showCatalog ? <div className="shadow" onClick={() => setShowCatalog(false)}></div> : null

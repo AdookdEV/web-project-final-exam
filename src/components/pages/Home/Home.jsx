@@ -1,54 +1,45 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import './style.css';
 import ProductsGrid from "./ProductsGrid";
 
 import FakeShopAPI from "../../../services/dummy-shop-api";
 
-class Home extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            products: [],
-            loadingData: false
-        };
-    }
+const Home = (props) => {
+  const [products, setProducts] = useState([]);
+  const [loadingData, setLoadingData] = useState(false);
 
+  useEffect(() => {
+    fetchProducts();
+  }, [])
 
+  
 
-    componentDidMount = () => {
-        console.log("Fetch Data");
-        this.fetchProducts();
-    };
+  const fetchProducts = () => {
+    let shopApi = new FakeShopAPI();
+    setLoadingData(true);
+    setTimeout(() => {
+      shopApi.getAllProducts()
+        // .then(r => r.json())
+        .then(data => {
+          setLoadingData(false);
+          setProducts(data);
+        })
+        .catch(e => console.error(e));
+    }, 1000);
+  };
 
-    fetchProducts = () => {
-        let shopApi = new FakeShopAPI();
-        this.setState({
-            loadingData: true
-        });
-        setTimeout(() => {
-            shopApi.getAllProducts()
-                // .then(r => r.json())
-                .then(data => this.setState({ products: data, loadingData: false }))
-                .catch(e => console.error(e));
-        }, 1000);
+  return (
+    <main className="products-grid-container container-lg" >
+      {
+        loadingData
+          ? <div>Loading...</div>
+          : <ProductsGrid
+            className="content"
+            productsData={products} />
+      }
+    </main>
+  )
 
-    };
-
-
-    render() {
-        return (
-            <>
-                <main className="products-grid-container container-lg" >
-                    {
-                        this.state.loadingData
-                            ? <div>Loading...</div>
-                            : <ProductsGrid className="content" productsData={this.state.products} />
-                    }
-                </main>
-            </>
-        )
-    }
 };
-
 
 export default Home;
