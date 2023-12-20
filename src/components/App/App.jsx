@@ -15,14 +15,17 @@ import FakeShopAPI from '../../services/dummy-shop-api';
 import './style.css';
 import { AlertMessagesContext } from '../../context/AlertMessagesContext';
 import AlertBox from '../AlertBox';
+import { useLocalStorage } from '@uidotdev/usehooks';
+import CartPage from '../../pages/CartPage/CartPage';
+import ProductPage from '../../pages/ProductPage/ProductPage';
 
 
 function App() {
     const [categories, setCategories] = useState([]);
     const [onLoading, setOnLoading] = useState(false);
-    const [cartItems, setCartItems] = useState([]);
+    const [cartItems, setCartItems] = useLocalStorage("cartItems", []);
     const [alertMessages, setAlertMessages] = useState([]);
-    const [favouriteProducts, setFavouriteProducts] = useState([]);
+    const [favouriteProducts, setFavouriteProducts] = useLocalStorage("favouriteProducts", []);
 
     useEffect(() => {
         fetchCategories();
@@ -67,18 +70,18 @@ function App() {
                                                 onAddFavouriteProduct={addFavouriteProduct}
                                                 onRemoveFavouriteProduct={removeFavouriteProduct} />}>
                                         </Route>
-                                        
-                                        <Route path='/product/:productId' element={<h1>Product page</h1>}></Route>
+
+                                        <Route path='/product/:productId' element={<ProductPage />}></Route>
                                         <Route path='/category/:categoryName' element={<h1>Category page</h1>}></Route>
                                         <Route path='/client_account/login' element={<Login />}></Route>
                                         <Route path='/client_account/register' element={<Registeration />}></Route>
-                                        <Route path='/client_account/orders' element={<h1>Orders page</h1>}></Route>
                                         <Route path='/client_account/addresses' element={<h1>Account page</h1>}></Route>
-                                        <Route path='/client_account/contacts' element={<h1>Conctacts page</h1>}></Route>
-                                        <Route path='/client_account/password/change' element={<h1>Change Password page</h1>}></Route>
                                         <Route path='/search' element={<h1>Search page</h1>}></Route>
-                                        <Route path='/compares' element={<h1>Compares page</h1>}></Route>
-                                        <Route path='/cart_items' element={<h1>Cart page</h1>}></Route>
+                                        <Route path='/cart_items' element={
+                                            <CartPage
+                                                onAddFavouriteProduct={addFavouriteProduct}
+                                                onRemoveFavouriteProduct={removeFavouriteProduct} />}>
+                                        </Route>
 
                                         <Route path='/favourites' element={
                                             <Favourite favouriteProducts={favouriteProducts}
@@ -87,8 +90,6 @@ function App() {
                                         </Route>
 
                                         <Route path='/page/feed_back' element={<Feedback />}></Route>
-                                        <Route path='/page/pickup-location' element={<h1>Pickup location page</h1>}></Route>
-                                        <Route path='/page/delivery-and-payment' element={<h1>Delivery and Payment page</h1>}></Route>
                                     </Routes>
                                 </main>
                                 <Footer />

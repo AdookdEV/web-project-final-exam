@@ -112,7 +112,7 @@ export default class FakeShopAPI {
         return this._categories;
     };
 
-    getProductById = (id) => {
+    getProductById = async (id) => {
         for (let prod of this._products) {
             if (prod.id === id) {
                 return prod;

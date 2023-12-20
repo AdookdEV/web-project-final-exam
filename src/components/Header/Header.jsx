@@ -27,12 +27,6 @@ function Header({ categories, favouriteProducts }) {
           <div className="header__top-inner container-lg">
             <ul className="header__menu">
               <li className="header__menu-item">
-                <Link to="/page/delivery-and-payment">Delivery and payment</Link>
-              </li>
-              <li className="header__menu-item">
-                <Link to="/page/pickup-location">Pickup points</Link>
-              </li>
-              <li className="header__menu-item">
                 <Link to="/page/feed_back">Support</Link>
               </li>
             </ul>

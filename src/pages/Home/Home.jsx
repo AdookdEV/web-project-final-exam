@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import './style.css';
-import ProductsGrid from "./ProductsGrid";
+import ProductsGrid from "../../components/ProductsGrid";
 
 import FakeShopAPI from "../../services/dummy-shop-api";
 

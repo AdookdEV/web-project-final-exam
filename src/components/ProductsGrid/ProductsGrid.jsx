@@ -1,15 +1,25 @@
 import { Link } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
-
-
 import { CartContext } from "../../context/CartContext";
 import { AlertMessagesContext } from "../../context/AlertMessagesContext";
 import { createAlertMessage } from "../../util/alert-message";
 import ICONS from "../../util/icons";
 
+import './style.css'
+
+
+const isFav = (product) => {
+    if (product === null) {
+        throw new Error("Can't process null");
+    }
+    const res = localStorage.getItem('favouriteProducts');
+    if (res === null || res.length === 0) return false;
+    const products = JSON.parse(res);
+    return products.filter((p) => p.id === product.id).length !== 0;
+};
 
 const ProductCard = ({ productData, onAddFavouriteProduct, onRemoveFavouriteProduct}) => {
-    const [inFavourites, setInFavourites] = useState(false);
+    const [inFavourites, setInFavourites] = useState(isFav(productData));
     const [cartItemsNumber, setCartItemsNumber] = useState(0);
     const [inCompare, setInCompare] = useState(false);
 
@@ -36,6 +46,8 @@ const ProductCard = ({ productData, onAddFavouriteProduct, onRemoveFavouriteProd
         }
         setInFavourites(!inFavourites);
     };
+
+    
 
     const handleCartLick = () => {
         setCartItemsNumber(cartItemsNumber + 1);
@@ -70,11 +82,11 @@ const ProductCard = ({ productData, onAddFavouriteProduct, onRemoveFavouriteProd
         <div className="product-card">
             <div className="product-card__content">
                 <div className="product-card__photo-area">
-                    <Link>
+                    <Link to={`/product/${productData.id}`}>
                         <img className="product-card__img" src={productData.imageUrl} alt={productData.title} />
                     </Link>
                 </div>
-                <div className="product-card__title-area"><Link>{productData.title}</Link></div>
+                <div className="product-card__title-area"><Link to={`/product/${productData.id}`} >{productData.title}</Link></div>
                 <div className="product-card__controls-area">
                     <div className="product-card__fav-btn">
                         <button
@@ -113,4 +125,20 @@ const ProductCard = ({ productData, onAddFavouriteProduct, onRemoveFavouriteProd
     );
 };
 
-export default ProductCard;
+const ProductsGrid = ({ className, productsData, onAddFavouriteProduct, onRemoveFavouriteProduct, }) => {
+    return (
+        <div className={`products-grid-content ${className}`}>
+            {
+                productsData.map((p) =>
+                    <div className="products-grid__item" key={p.id}>
+                        <ProductCard
+                            productData={p}
+                            onAddFavouriteProduct={onAddFavouriteProduct}
+                            onRemoveFavouriteProduct={onRemoveFavouriteProduct} />
+                    </div>)
+            }
+        </div>
+    );
+};
+
+export default ProductsGrid;

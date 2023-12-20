@@ -1,6 +1,10 @@
-import ProductsGrid from "../Home/ProductsGrid";
+import { useEffect } from "react";
+import ProductsGrid from "../../components/ProductsGrid";
 
 const Favourite = ({ favouriteProducts, onAddFavouriteProduct, onRemoveFavouriteProduct }) => {
+    useEffect(() => {
+        document.title = "Favourites";
+    }, [])
     return (
         <div className="favourite container-lg">
             <div className="favourite__content">
