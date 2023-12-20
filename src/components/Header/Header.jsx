@@ -2,16 +2,17 @@ import { Link } from 'react-router-dom';
 import { FiPhone } from "react-icons/fi";
 import { useState } from 'react';
 
-import SearchArea from './SearchArea';
-import CategoryMenu from './CategoryMenu';
 import CatalogButton from './CatalogButton';
+import SearchArea from './SearchArea';
 import ControllArea from './ControllArea';
 import CategoryCollection from './CategoryCollection';
+import CategoryMenu from './CategoryMenu';
+
 
 import './style.css';
 
 
-function Header({ categories }) {
+function Header({ categories, favouriteProducts }) {
   const [showCatalog, setShowCatalog] = useState(false);
   
 
@@ -58,7 +59,7 @@ function Header({ categories }) {
 
               <SearchArea />
 
-              <ControllArea />
+              <ControllArea favouriteProducts={favouriteProducts}/>
 
               {
                 showCatalog ?

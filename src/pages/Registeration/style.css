@@ -1,0 +1,33 @@
+.register h2 {
+    font-size: 24px;
+    margin-bottom: 16px;
+}
+
+.register__form input {
+    display: block;
+    outline: 0;
+    padding: 5px 10px;
+    width: max(400px, 50%);
+}
+
+.register__content {
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+.register__form-row {
+    margin-top: 10px;
+}
+
+.register__form-bottom {
+    margin-top: 30px;
+}
+
+.register__form-bottom button {
+    width: 5rem;
+    margin-right: 1rem;
+}
+
+.error-input {
+    border: 1px solid red;
+}

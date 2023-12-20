@@ -11,11 +11,7 @@
     width: 100%;
     gap: 2rem;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    padding-top: 1rem;
-    padding-bottom: 2rem;
 }
-
-
 
 
 

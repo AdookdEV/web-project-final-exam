@@ -26,6 +26,11 @@ body {
     font-weight: 400;
 }
 
+main {
+    padding-top: 20px;
+    padding-bottom: 30px;
+}
+
 ul,
 ol {
     padding: 0;
@@ -37,6 +42,10 @@ ol {
 a {
     text-decoration: none;
     color: black;
+}
+
+input {
+    outline: 0;
 }
 
 .page-layout {
@@ -71,4 +80,11 @@ a {
     line-height: var(--indicator-radius);
     text-align: center;
     font-size: 0.7rem;
+}
+
+
+.empty-catalog-message {
+    font-size: 1.5rem;
+    font-weight: 400;
+    padding: 20px 0px;
 }

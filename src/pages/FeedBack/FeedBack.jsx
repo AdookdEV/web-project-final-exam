@@ -1,8 +1,7 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import './style.css';
-import { AlertMessagesContext } from "../../../context/AlertMessagesContext";
-import { createAlertMessage } from "../../../util/alert-message";
-import { Navigate, redirect, redirectDocument } from "react-router-dom";
+import { AlertMessagesContext } from "../../context/AlertMessagesContext";
+import { createAlertMessage } from "../../util/alert-message";
 
 const FeedBack = (props) => {
     const [feedbackContent, setFeedbackContent] = useState("");
@@ -11,6 +10,10 @@ const FeedBack = (props) => {
     const [highlightEmail, setHighlightEmail] = useState(false);
 
     const {alertMessages, setAlertMessages} = useContext(AlertMessagesContext);
+
+    useEffect(() => {
+        document.title = "Feedback";
+    });
 
     const clearForm = () => {
         setFeedbackContent("");
@@ -47,7 +50,7 @@ const FeedBack = (props) => {
     }
 
     return (
-        <main className="feedback container-lg" onSubmit={handleSubmit}>
+        <div className="feedback container-lg" onSubmit={handleSubmit}>
             <div className="feedback__content">
                 <form className="feedback__form">
                     <h2>Feedback</h2>
@@ -71,7 +74,7 @@ const FeedBack = (props) => {
                     <button className="button feedback__btn" type="submit">Send message</button>
                 </form>
             </div>
-        </main>
+        </div>
     );
 }
 

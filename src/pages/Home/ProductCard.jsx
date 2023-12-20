@@ -1,14 +1,14 @@
 import { Link } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 
-import { CartContext } from "../../../context/CartContext";
-import { AlertMessagesContext } from "../../../context/AlertMessagesContext";
 
-import { createAlertMessage } from "../../../util/alert-message";
-import ICONS from "../../../util/icons";
+import { CartContext } from "../../context/CartContext";
+import { AlertMessagesContext } from "../../context/AlertMessagesContext";
+import { createAlertMessage } from "../../util/alert-message";
+import ICONS from "../../util/icons";
 
 
-const ProductCard = ({ productData }) => {
+const ProductCard = ({ productData, onAddFavouriteProduct, onRemoveFavouriteProduct}) => {
     const [inFavourites, setInFavourites] = useState(false);
     const [cartItemsNumber, setCartItemsNumber] = useState(0);
     const [inCompare, setInCompare] = useState(false);
@@ -26,11 +26,13 @@ const ProductCard = ({ productData }) => {
                 ...alertMessages,
                 createAlertMessage("Product was removed from favourites", false)
             ]);
+            onRemoveFavouriteProduct(productData);
         } else {
             setAlertMessages([
                 ...alertMessages,
                 createAlertMessage("✔ Product was added to favourites", false)
             ]);
+            onAddFavouriteProduct(productData);
         }
         setInFavourites(!inFavourites);
     };
