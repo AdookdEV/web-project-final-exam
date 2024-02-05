@@ -18,17 +18,16 @@ const isFav = (product) => {
     return products.filter((p) => p.id === product.id).length !== 0;
 };
 
-const ProductCard = ({ productData, onAddFavouriteProduct, onRemoveFavouriteProduct}) => {
-    const [inFavourites, setInFavourites] = useState(isFav(productData));
-    const [cartItemsNumber, setCartItemsNumber] = useState(0);
-    const [inCompare, setInCompare] = useState(false);
-
+const ProductCard = ({ productData, onAddFavouriteProduct, onRemoveFavouriteProduct }) => {
     const { cartItems, setCartItems } = useContext(CartContext);
     const { alertMessages, setAlertMessages } = useContext(AlertMessagesContext);
+    
+    const [cartItemsNumber, setCartItemsNumber] = useState(0);
+    const [inFavourites, setInFavourites] = useState(isFav(productData));
 
     useEffect(() => {
-
-    }, [inCompare])
+        setCartItemsNumber(cartItems.filter(p => p.id === productData.id).length);
+    }, [cartItems, productData]);
 
     const handleFavouriteClick = () => {
         if (inFavourites) {
@@ -47,8 +46,6 @@ const ProductCard = ({ productData, onAddFavouriteProduct, onRemoveFavouriteProd
         setInFavourites(!inFavourites);
     };
 
-    
-
     const handleCartLick = () => {
         setCartItemsNumber(cartItemsNumber + 1);
         setCartItems([
@@ -61,21 +58,6 @@ const ProductCard = ({ productData, onAddFavouriteProduct, onRemoveFavouriteProd
                 createAlertMessage("✔ Product was added to cart", false)
             ]);
         }
-    };
-
-    const handleCompareClick = () => {
-        if (inCompare) {
-            setAlertMessages([
-                ...alertMessages,
-                createAlertMessage("Product was removed from comapared products", false)
-            ]);
-        } else {
-            setAlertMessages([
-                ...alertMessages,
-                createAlertMessage("✔ Product was added to comapared products", false)
-            ]);
-        }
-        setInCompare(!inCompare);
     };
 
     return (
@@ -93,14 +75,6 @@ const ProductCard = ({ productData, onAddFavouriteProduct, onRemoveFavouriteProd
                             className={inFavourites ? "product-card__fav-btn--favourite" : ""}
                             onClick={handleFavouriteClick}>
                             {inFavourites ? ICONS.HEART_FILL : ICONS.HEART}
-                        </button>
-                    </div>
-                    <div className="product-card__compare-btn">
-                        <button
-                            className={inCompare ? "product-card__compare-btn--compared" : ""}
-                            onClick={handleCompareClick}>
-
-                            {ICONS.COMPARE}
                         </button>
                     </div>
                     <div className="product-card__cart-btn">

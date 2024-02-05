@@ -6,7 +6,7 @@ import useMediaQuery from "../../../hooks/useMediaQuery";
 import './style.css'
 
 
-const CategoryDropDown = ({ categories, show, onMouseEnter, onMouseLeave }) => {
+const CategoryDropDown = ({ categories, show, onMouseEnter, onMouseLeave, onCategoryClick }) => {
   if (!show) return null;
   return (
     <div className="header__category-drop-down"
@@ -16,7 +16,7 @@ const CategoryDropDown = ({ categories, show, onMouseEnter, onMouseLeave }) => {
       <ul>
         {
           categories.map(c =>
-            <li key={c.id}><Link to={`/category/${c.id}`}>{c.title}</Link></li>
+            <li key={c.id}><Link to={`/category/${c.id}`} onClick={onCategoryClick}>{c.title}</Link></li>
           )
         }
       </ul>
@@ -72,7 +72,8 @@ function CategoryMenu({categories}) {
           <CategoryDropDown categories={categories.slice(displayedCategoryNumber)}
               show={showDropDown}
               onMouseEnter={handleShowDropDown}
-              onMouseLeave={handleHideDropDown} />
+              onMouseLeave={handleHideDropDown}
+              onCategoryClick={handleHideDropDown}/>
         </ul>
       </div>
     </div>

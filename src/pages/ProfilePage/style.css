@@ -1,0 +1,39 @@
+.profile__form-row {
+    display: flex;
+    flex-direction: column;
+    margin-top: 7px;
+}
+
+.profile__form-row input {
+    height: 40px;
+    margin-top: 4px;
+    padding: 10px;
+    outline: 0;
+}   
+
+.profile__password-control {
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.profile__password-checkbox {
+    margin-right: 5px;
+}
+
+.profile__form-btn {
+    width: 200px;
+    margin-top: 16px;
+}
+
+.profile__input-error {
+    border: 1px solid red;
+}
+
+.profile__logout {
+    color: var(--accent-color);
+    margin-left: 10px;
+}
+
+.profile__logout:hover {
+    text-decoration: underline;
+}

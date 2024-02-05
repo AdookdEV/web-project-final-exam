@@ -1,4 +1,6 @@
-const SearchResult = ({ products, onLeave }) => {
+import { Link } from "react-router-dom";
+
+const SearchResult = ({ products, onLeave, handleItemClick }) => {
     return (
         <ul className="header__search-result" onMouseLeave={onLeave}>
             {
@@ -6,7 +8,7 @@ const SearchResult = ({ products, onLeave }) => {
                     if (i >= 10) return null;
                     return (
                         <li key={p.id} >
-                            <a href={`/search?q=${p.title}`}>{p.title}</a>
+                            <Link to={`/search?q=${p.title}`} onClick={handleItemClick}>{p.title}</Link>
                         </li>
                     )
                 })

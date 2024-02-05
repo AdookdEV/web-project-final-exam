@@ -1,6 +1,9 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './style.css';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
+import FakeShopAPI from '../../services/dummy-shop-api';
+import { createAlertMessage } from '../../util/alert-message';
+import { AlertMessagesContext } from '../../context/AlertMessagesContext';
 
 const Registeration = (props) => {
     const [emailValue, setEmailValue] = useState("");
@@ -10,6 +13,10 @@ const Registeration = (props) => {
     const [highlightPassword, setHighlightPassword] = useState(false);
     const [highlightFullname, setHighlightFullname] = useState(false);
 
+    const navigate = useNavigate();
+
+    const {alertMessages, setAlertMessages} = useContext(AlertMessagesContext);
+
     useEffect(() => {
         document.title = "Registration";
     });
@@ -17,7 +24,25 @@ const Registeration = (props) => {
     const onSubmit = (event) => {
         event.preventDefault();
         if (!valid()) return;
-        clearForm();
+        const api = new FakeShopAPI();
+        api.register(emailValue, passwordValue, fullnameValue)
+            // .then(r => r.json())
+            .then(r => {
+                if (r.success) {
+                    setAlertMessages([
+                        ...alertMessages,
+                        createAlertMessage("You are registered.", false)
+                    ])
+                    clearForm();
+                    navigate("/client_account/login");
+                } else {
+                    setAlertMessages([
+                        ...alertMessages,
+                        createAlertMessage(r.message, true)
+                    ]);
+                }
+            })
+            .catch(e => console.error(e));
     };
 
     const valid = () => {
@@ -30,7 +55,7 @@ const Registeration = (props) => {
         if (!passwordValue.length) {
             setHighlightFullname(true);
         }
-        return emailValue.length && passwordValue.length && passwordValue.length;
+        return emailValue.length && fullnameValue.length && passwordValue.length;
     };
 
     const clearForm = () => {
@@ -40,14 +65,17 @@ const Registeration = (props) => {
     };
 
     const handleFullnameChange = (e) => {
+        setHighlightFullname(false);
         setFullnameValue(e.target.value);
     };
 
     const handleEmailChange = (e) => {
+        setHighlightEmail(false);
         setEmailValue(e.target.value);
     };
 
     const handlePasswordChange = (e) => {
+        setHighlightPassword(false);
         setPasswordValue(e.target.value);
     };
 

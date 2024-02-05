@@ -58,7 +58,7 @@ function Header({ categories, favouriteProducts }) {
               {
                 showCatalog ?
                   <div className="header__collection">
-                    <CategoryCollection categories={categories} />
+                    <CategoryCollection categories={categories} handleCategoryClick={() => setShowCatalog(false)}/>
                   </div>
                   : null
               }

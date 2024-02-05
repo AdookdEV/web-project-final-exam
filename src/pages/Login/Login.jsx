@@ -1,7 +1,10 @@
-import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
 
 import './style.css';
+import FakeShopAPI from "../../services/dummy-shop-api";
+import { AlertMessagesContext } from "../../context/AlertMessagesContext";
+import { createAlertMessage } from "../../util/alert-message";
 
 
 const Login = (props) => {
@@ -10,6 +13,10 @@ const Login = (props) => {
     const [highlightEmail, setHighlightEmail] = useState(false);
     const [highlightPassword, setHighlightPassword] = useState(false);
 
+
+    const { alertMessages, setAlertMessages } = useContext(AlertMessagesContext);
+    const nagivate = useNavigate();
+
     useEffect(() => {
         document.title = "Login";
     });
@@ -17,7 +24,22 @@ const Login = (props) => {
     const onSubmit = (event) => {
         event.preventDefault();
         if (!validate()) return;
-        clearFields();
+        const api = new FakeShopAPI();
+        api.login(emailValue, passwordValue)
+            // .then(r => r.json())
+            .then((r) => {
+                if (r.success) {
+                    localStorage.setItem("token", r.token);
+                    clearFields();
+                    nagivate("/");
+                }
+                else {
+                    setAlertMessages([
+                        ...alertMessages,
+                        createAlertMessage(r.message, true)
+                    ]);
+                }
+            })
     };
 
     const validate = () => {
@@ -70,7 +92,7 @@ const Login = (props) => {
 
                     <div className="login__form-bottom">
                         <button className="button">Login</button>
-                        <Link className="form__link"to="/client_account/register">Register</Link>
+                        <Link className="form__link" to="/client_account/register">Register</Link>
                     </div>
                 </form>
             </div>

@@ -2,6 +2,8 @@ import { useCallback, useEffect, useState } from "react";
 import { CiSearch } from "react-icons/ci";
 import FakeShopAPI from "../../../services/dummy-shop-api";
 import SearchResult from "./SearchResult";
+import { useNavigate } from "react-router-dom";
+
 
 
 const fakeShopAPI = new FakeShopAPI();
@@ -9,6 +11,8 @@ const fakeShopAPI = new FakeShopAPI();
 function SearchArea() {
     const [searchValue, setSearchValue] = useState('');
     const [fetchedProducts, setFetchedProducts] = useState([]);
+
+    const navigate = useNavigate();
 
     const fetchProducts = useCallback(() => {
         fakeShopAPI.filterProductsByTitle(searchValue)
@@ -24,8 +28,6 @@ function SearchArea() {
         fetchProducts();
     }, [fetchProducts, searchValue]);
 
-    
-
     const clearFetchedData = () => {
         setFetchedProducts([]);
     }
@@ -34,10 +36,17 @@ function SearchArea() {
         setSearchValue(e.target.value);
     };
 
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        clearFetchedData();
+        navigate('/search?q=' + searchValue);
+    }
+
     return (
         <div className="header__search-area" onMouseLeave={clearFetchedData}>
-            <form className="header__search-form" method="get" action="/search">
+            <form className="header__search-form" onSubmit={handleSubmit}>
                 <input className="header__search-input"
+                    value={searchValue}
                     name="q"
                     placeholder="Search"
                     onClick={fetchProducts}
@@ -47,7 +56,7 @@ function SearchArea() {
                 <button className="header__search-btn" type="submit"><CiSearch className="icon-search" /></button>
                 {
                     fetchedProducts.length > 0
-                        ? <SearchResult products={fetchedProducts} />
+                        ? <SearchResult products={fetchedProducts} handleItemClick={clearFetchedData}/>
                         : null
                 }
             </form>

@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { CartContext } from '../../context/CartContext';
 import ICONS from '../../util/icons';
 import './style.css';
@@ -127,6 +127,10 @@ const CartControl = ({ cartItems, cartCount }) => {
 const CartPage = ({ onAddFavouriteProduct, onRemoveFavouriteProduct }) => {
     const { cartItems, setCartItems } = useContext(CartContext);
 
+    useEffect(() => {
+        document.title = "My Cart";
+    }, []);
+
     const handleRemoveCartItem = (product) => {
         setCartItems(
             cartItems.filter(p => p.id !== product.id)
@@ -165,7 +169,6 @@ const CartPage = ({ onAddFavouriteProduct, onRemoveFavouriteProduct }) => {
                             <CartControl cartItems={cartItems} cartCount={cartItems.length} />
                         </div>
                 }
-
             </div>
         </div>
     );

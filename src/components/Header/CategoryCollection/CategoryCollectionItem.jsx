@@ -2,7 +2,7 @@ import { useState } from "react";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { Link } from "react-router-dom";
 
-export const CategoryCollectionItem = ({ categoryData }) => {
+export const CategoryCollectionItem = ({ categoryData, handleCategoryClick }) => {
     const [showAll, setShowAll] = useState(false);
 
     const handleChange = () => {
@@ -11,17 +11,17 @@ export const CategoryCollectionItem = ({ categoryData }) => {
 
     return (
         <div className="header__collection-item">
-            <Link className="header__collection-img-title" to={`/category/${categoryData.id}`}>
+            <Link className="header__collection-img-title" to={`/category/${categoryData.id}`} onClick={handleCategoryClick}>
                 <img className="header__collection-img" src={categoryData.image} alt={categoryData.title} />
                 <span>{categoryData.title}</span>
             </Link>
             <ul className="header__collection-controlls">
-                {   
+                {
                     categoryData.subCategories.map((c, i) => {
                         const isHide = !showAll && i >= 5;
                         return (
                             <li className={isHide ? "is-hide" : ""} key={c.id}>
-                                <Link to={`/category/${c.id}`}>{c.title}</Link>
+                                <Link to={`/category/${c.id}`} onClick={handleCategoryClick}>{c.title}</Link>
                             </li>
                         );
                     })

@@ -18,6 +18,9 @@ import AlertBox from '../AlertBox';
 import { useLocalStorage } from '@uidotdev/usehooks';
 import CartPage from '../../pages/CartPage/CartPage';
 import ProductPage from '../../pages/ProductPage/ProductPage';
+import ProfilePage from '../../pages/ProfilePage/ProfilePage';
+import NotFound from '../../pages/NotFound/NotFound';
+import CategoryPage from '../../pages/CategoryPage';
 
 
 function App() {
@@ -72,10 +75,11 @@ function App() {
                                         </Route>
 
                                         <Route path='/product/:productId' element={<ProductPage />}></Route>
-                                        <Route path='/category/:categoryName' element={<h1>Category page</h1>}></Route>
+                                        <Route path='/category/:categoryId' element={<CategoryPage onAddFavouriteProduct={addFavouriteProduct}
+                                            onRemoveFavouriteProduct={removeFavouriteProduct} />}></Route>
                                         <Route path='/client_account/login' element={<Login />}></Route>
                                         <Route path='/client_account/register' element={<Registeration />}></Route>
-                                        <Route path='/client_account/addresses' element={<h1>Account page</h1>}></Route>
+                                        <Route path='/client_account' element={<ProfilePage />}></Route>
                                         <Route path='/search' element={<h1>Search page</h1>}></Route>
                                         <Route path='/cart_items' element={
                                             <CartPage
@@ -90,6 +94,7 @@ function App() {
                                         </Route>
 
                                         <Route path='/page/feed_back' element={<Feedback />}></Route>
+                                        <Route path="*" element={<NotFound />} />
                                     </Routes>
                                 </main>
                                 <Footer />
